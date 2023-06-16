@@ -1,0 +1,46 @@
+@using ABC.Core.Enums;
+@using ABC.Core.Interfaces.Business;
+@using ABC.Core.Models.Reporting;
+@inject IReportingService Reporting;
+
+@{
+    ViewData["Title"] = "Admin";
+    var ordersByYears = Reporting.GetByRange(ReportingType.Orders, RangeType.Yearly);
+    var ordersByMonths = Reporting.GetByRange(ReportingType.Orders, RangeType.Monthly);
+}
+
+<h1>Reporting</h1>
+
+<div class="row my-3">
+    <div class="col">
+        <div class="card shadow">
+            <h2 class="card-title ms-3 mt-1">Total by years and months</h2>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 pb-5">
+                    <div class="col">
+                        <h2>Years</h2>
+                        <ul>
+                            @foreach (var orderByYear in ordersByYears)
+                            {
+                                <li>
+                                    <span>@(orderByYear.X):</span> <span>@(orderByYear.Y)</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h2>Months (2022)</h2>
+                        <ul>
+                            @foreach (var orderByMonth in ordersByMonths)
+                            {
+                                <li>
+                                    <span>@(orderByMonth.X):</span> <span>@(orderByMonth.Y)</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

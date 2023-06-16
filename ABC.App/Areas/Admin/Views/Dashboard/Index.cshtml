@@ -1,0 +1,82 @@
+@using ABC.Core.Enums;
+@using ABC.Core.Interfaces.Business;
+@using ABC.Core.Models.Reporting;
+@inject IReportingService Reporting;
+
+@{
+    ViewData["Title"] = "Admin";
+    var v1 = new ValueWithEnum<int, Status>(Reporting.GetCount(ReportingType.Orders, ""), Status.Regular);
+    var v2 = new ValueWithEnum<int, Status>(Reporting.GetCount(ReportingType.Orders, ""), Status.Warning);
+    var v3 = new ValueWithEnum<int, Status>(Reporting.GetCount(ReportingType.Orders, ""), Status.Error);
+    var v4 = new ValueWithEnum<int, Status>(Reporting.GetCount(ReportingType.Orders, ""), Status.Critical);
+
+    var ordersByYears = Reporting.GetByRange(ReportingType.Orders, RangeType.Yearly);
+    var ordersByMonths = Reporting.GetByRange(ReportingType.Orders, RangeType.Monthly);
+}
+
+<h1>Dashboard</h1>
+
+<div class="row my-3">
+    <div class="col">
+        <div class="card shadow">
+            <h2 class="card-title ms-3 mt-1">Total</h2>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 pb-5">
+                    <div class="col">
+                        <div class="card ms-4 mt-4 h-100 border-@(v1.EnumValue.ToCssClass()) position-relative shadow">
+                            <div class="card py-1 px-2 fs-2 fw-bold bg-@(v1.EnumValue.ToCssClass()) bg-gradient text-white position-absolute translate-middle">
+                                <i class="bi bi-calendar-date"></i>
+                            </div>
+                            <div class="card-body ms-4">
+                                <span class="fs-5 fw-bolder">Day:</span>
+                                <span class="fs-3 fw-bold font-monospace text-@(v1.EnumValue.ToCssClass())"> @v1.Value</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card ms-4 mt-4 h-100 border-@(v2.EnumValue.ToCssClass()) position-relative shadow">
+                            <div class="card py-1 px-2 fs-2 fw-bold bg-@(v2.EnumValue.ToCssClass()) bg-gradient text-white position-absolute translate-middle">
+                                <i class="bi bi-calendar-week"></i>
+                            </div>
+                            <div class="card-body ms-4">
+                                <span class="fs-5 fw-bolder">Week:</span>
+                                <span class="fs-3 fw-bold font-monospace text-@(v2.EnumValue.ToCssClass())"> @v2.Value</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card ms-4 mt-4 h-100 border-@(v3.EnumValue.ToCssClass()) position-relative shadow">
+                            <div class="card py-1 px-2 fs-2 fw-bold bg-@(v3.EnumValue.ToCssClass()) bg-gradient text-white position-absolute translate-middle">
+                                <i class="bi bi-calendar-month"></i>
+                            </div>
+                            <div class="card-body ms-4">
+                                <span class="fs-5 fw-bolder">Month:</span>
+                                <span class="fs-3 fw-bold font-monospace text-@(v3.EnumValue.ToCssClass())"> @v3.Value</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card ms-4 mt-4 h-100 border-@(v4.EnumValue.ToCssClass()) position-relative shadow">
+                            <div class="card py-1 px-2 fs-2 fw-bold bg-@(v4.EnumValue.ToCssClass()) bg-gradient text-white position-absolute translate-middle">
+                                <i class="bi bi-calendar3"></i>
+                            </div>
+                            <div class="card-body ms-4">
+                                <span class="fs-5 fw-bolder">Year:</span>
+                                <span class="fs-3 fw-bold font-monospace text-@(v4.EnumValue.ToCssClass())"> @v4.Value</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+        })()
+    </script>
+}
