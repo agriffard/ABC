@@ -1,5 +1,4 @@
 global using System.Diagnostics;
-global using ABC.App.Configuration;
 global using ABC.Controllers;
 global using ABC.Core.Configuration;
 global using ABC.Core.Constants;
