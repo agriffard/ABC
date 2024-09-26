@@ -9,7 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\ABC.Business\ABC.Business.csproj" />
         <ProjectReference Include="..\ABC.Core\ABC.Core.csproj" />
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
     </ItemGroup>
 
 </Project>
